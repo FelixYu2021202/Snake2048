@@ -60,17 +60,15 @@ blockname = """
 4T
 8T
 17T
-""".split(
-    "\n"
-)
-# unfinish textures:
-"""
 35T
 70T
 140T
 281T
 562T
-1Q"""
+1Q
+""".split(
+    "\n"
+)
 blockbase = cv2.imread("D:\\felix\py\snake2048\pics\\block.b.png")
 picsB = [
     cv2.imread("D:\\felix\py\snake2048\pics\\b" + x + ".b.png") for x in blockname
