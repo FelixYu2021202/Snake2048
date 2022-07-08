@@ -69,14 +69,10 @@ blockname = """
 """.split(
     "\n"
 )
-blockbase = cv2.imread("D:\\felix\py\snake2048\pics\\block.b.png")
-picsB = [
-    cv2.imread("D:\\felix\py\snake2048\pics\\b" + x + ".b.png") for x in blockname
-]  # blocks
-picsS = [
-    cv2.imread("D:\\felix\py\snake2048\pics\\s" + x + ".b.png") for x in blockname
-]  # snake's'
-snakeheadbase = cv2.imread("D:\\felix\py\snake2048\pics\shead.b.png")
+blockbase = cv2.imread(".\pics\\block.b.png")
+picsB = [cv2.imread(".\pics\\b" + x + ".b.png") for x in blockname]  # blocks
+picsS = [cv2.imread(".\pics\\s" + x + ".b.png") for x in blockname]  # snake's'
+snakeheadbase = cv2.imread(".\pics\shead.b.png")
 snakehead = [
     np.rot90(snakeheadbase, k=3),
     snakeheadbase,
