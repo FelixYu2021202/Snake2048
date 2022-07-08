@@ -269,7 +269,10 @@ class Gameboard:
                         pos += 1
                         self.snake[pos, 2] = newnum
                         self.biggest = max(newnum, self.biggest)
-                        self.length -= i - pos
+                        pl = i - pos
+                        for j in range(i + 1, self.length):
+                            self.snake[j - pl, 2] = self.snake[j, 2]
+                        self.length -= pl
                         merge = 1
                         break
                 #### *add
