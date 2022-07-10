@@ -184,14 +184,20 @@ class Gameboard:
 
         while self.status:
             # block
-            if randint(1, 3) == 1:  # 0.3333 chance
-                x, y = self.getpos()
-                num = self.getnum()
-                self.gameboarddat[x, y] = num
-            if randint(1, 5) == 1:  # 0.2 chance
-                x, y = self.getpos()
-                num = self.getnum()
-                self.gameboarddat[x, y] = num
+            cnt = 64
+            for i in range(8):
+                for j in range(8):
+                    if self.gameboarddat[i, j] != 0:
+                        cnt -= 1
+            if cnt > 1:
+                if randint(1, 3) == 1:  # 0.3333333 chance
+                    x, y = self.getpos()
+                    num = self.getnum()
+                    self.gameboarddat[x, y] = num
+                if randint(1, 6) == 1:  # 0.1666666 chance
+                    x, y = self.getpos()
+                    num = self.getnum()
+                    self.gameboarddat[x, y] = num
             ## crashed
             hd = self.snake[0, 3]
             if hd == 0:
@@ -312,26 +318,20 @@ class Gameboard:
                 self.gameboarddat[self.snake[i, 0], self.snake[i, 1]] = S
             for i in range(self.length - 1, 0, -1):
                 self.snake[i, 3] = self.snake[i - 1, 3]
-            for i in range(8):
-                for j in range(8):
-                    if self.gameboarddat[i, j] == S:
-                        self.gameboarddat[i, j] = 0
-            if hd == 0:
-                if self.snake[0, 1] > 0:
-                    if self.gameboarddat[self.snake[0, 0], self.snake[0, 1] - 1] == 0:
-                        self.gameboarddat[self.snake[0, 0], self.snake[0, 1] - 1] = S
-            if hd == 1:
-                if self.snake[0, 0] > 0:
-                    if self.gameboarddat[self.snake[0, 0] - 1, self.snake[0, 1]] == 0:
-                        self.gameboarddat[self.snake[0, 0] - 1, self.snake[0, 1]] = S
-            if hd == 2:
-                if self.snake[0, 1] < 7:
-                    if self.gameboarddat[self.snake[0, 0], self.snake[0, 1] + 1] == 0:
-                        self.gameboarddat[self.snake[0, 0], self.snake[0, 1] + 1] = S
-            if hd == 3:
-                if self.snake[0, 0] < 7:
-                    if self.gameboarddat[self.snake[0, 0] + 1, self.snake[0, 1]] == 0:
-                        self.gameboarddat[self.snake[0, 0] + 1, self.snake[0, 1]] = S
+            for s in self.snake:
+                self.gameboarddat[s[0], s[1]] = S
+            if self.snake[0, 1] > 0:
+                if self.gameboarddat[self.snake[0, 0], self.snake[0, 1] - 1] == 0:
+                    self.gameboarddat[self.snake[0, 0], self.snake[0, 1] - 1] = S
+            if self.snake[0, 0] > 0:
+                if self.gameboarddat[self.snake[0, 0] - 1, self.snake[0, 1]] == 0:
+                    self.gameboarddat[self.snake[0, 0] - 1, self.snake[0, 1]] = S
+            if self.snake[0, 1] < 7:
+                if self.gameboarddat[self.snake[0, 0], self.snake[0, 1] + 1] == 0:
+                    self.gameboarddat[self.snake[0, 0], self.snake[0, 1] + 1] = S
+            if self.snake[0, 0] < 7:
+                if self.gameboarddat[self.snake[0, 0] + 1, self.snake[0, 1]] == 0:
+                    self.gameboarddat[self.snake[0, 0] + 1, self.snake[0, 1]] = S
             if self.nextdir > -1:  # change the direction of the head
                 self.snake[0, 3] = self.nextdir
                 hd = self.snake[0, 3]
