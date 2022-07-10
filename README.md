@@ -2,12 +2,6 @@
 #### my first python game
 by FelixYu2021202:
 
-
-
-
-
-!! Notice: this game is not finished yet!
-
 #### How to play:
 1. Run `start.py`
 ![](.\pics\readmepng_1.png)
