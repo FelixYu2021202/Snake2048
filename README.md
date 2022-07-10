@@ -17,3 +17,5 @@ by FelixYu2021202:
 5. Don't let the snake crash into the walls
 6. Your goal is to let the biggest number on the snake be `1Q` (1 quadrillion)
 7. Have fun
+
+_You can watch the video `play.mp4` to know more about this game_
