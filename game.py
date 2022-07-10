@@ -91,6 +91,7 @@ class Gameboard:
     cur = 0
     status = 1  # 1: alive, 0: died
     length = 2
+    result = 1  # 1: lose, 2: win, 0: closed
 
     def __init__(self):
         for i in range(0, 920, 120):
@@ -108,7 +109,7 @@ class Gameboard:
                         [0, 0, 0, 0, 0, 0, 0, 0],
                     ]
                 )
-        cv2.imshow("game", self.gameboardbase)
+        cv2.imshow("Snake2048", self.gameboardbase)
         while True:
             key = cv2.waitKey()
             if key == 32:
@@ -116,6 +117,7 @@ class Gameboard:
                 break
             if key == 99:
                 cv2.destroyAllWindows()
+                self.result = 0
                 break
 
     def startGame(self):
@@ -137,6 +139,7 @@ class Gameboard:
         self.gameboarddat[x, y] = num
         st = self.render()
         if st == 0:  # key 'c': shut down the whole game
+            self.result = 0
             return
         # snake # no need to eat right now
         ## move & eat
@@ -237,9 +240,11 @@ class Gameboard:
                     break
             st = self.render()
             if st == 0:  # key 'c': shut down the whole game
+                self.result = 0
                 return
             if self.biggest == 50:
                 print("you win!")  # TODO: alert
+                self.result = 2
                 return
             # snake
             ## move & eat
@@ -333,6 +338,7 @@ class Gameboard:
                 self.nextdir = -1
 
         print("you died")  # TODO: alert
+        self.result = 1
 
     def render(self):
         self.cur = 0
@@ -434,7 +440,7 @@ class Gameboard:
                         ] = picsS[t]
                 i += 1
 
-            cv2.imshow("game", self.gameboard)
+            cv2.imshow("Snake2048", self.gameboard)
             key = cv2.waitKey(24)  # 1000/24ms is about 42ms
             if key == 99:
                 cv2.destroyAllWindows()
@@ -464,6 +470,3 @@ class Gameboard:
 
     def getnum(self):
         return P_randint(PROBABILITY[self.biggest])
-
-
-Gameboard()
