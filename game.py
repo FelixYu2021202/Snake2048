@@ -441,7 +441,7 @@ class Gameboard:
                 i += 1
 
             cv2.imshow("Snake2048", self.gameboard)
-            key = cv2.waitKey(24)  # 1000/24ms is about 42ms
+            key = cv2.waitKey(16)  # 1000/24ms is about 42ms
             if key == 99:
                 cv2.destroyAllWindows()
                 return 0
