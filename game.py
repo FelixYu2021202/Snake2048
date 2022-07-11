@@ -15,7 +15,7 @@ def P_randint(probability):
 
 S = -1
 
-blockname = """
+BLOCKNAME = """
 2
 4
 8
@@ -70,8 +70,8 @@ blockname = """
     "\n"
 )
 blockbase = cv2.imread(".\pics\\block.b.png")
-picsB = [cv2.imread(".\pics\\b" + x + ".b.png") for x in blockname]  # blocks
-picsS = [cv2.imread(".\pics\\s" + x + ".b.png") for x in blockname]  # snake's'
+picsB = [cv2.imread(".\pics\\b" + x + ".b.png") for x in BLOCKNAME]  # blocks
+picsS = [cv2.imread(".\pics\\s" + x + ".b.png") for x in BLOCKNAME]  # snake's'
 snakeheadbase = cv2.imread(".\pics\shead.b.png")
 snakehead = [
     np.rot90(snakeheadbase, k=3),

@@ -1,12 +1,12 @@
 import cv2
 import numpy as np
 
-from game import Gameboard
+from game import Gameboard, BLOCKNAME
 
 startPage = cv2.imread(".\pics\start.png")
 rulePage = cv2.imread(".\pics\\rules.png")
-lose = cv2.imread(".\pics\lose.png")
-win = cv2.imread(".\pics\win.png")
+losebase = cv2.imread(".\pics\lose.png")
+winbase = cv2.imread(".\pics\win.png")
 cv2.imshow("Snake2048", startPage)
 
 page = 0
@@ -22,17 +22,29 @@ while True:
         cv2.destroyAllWindows()
         break
     if key == 32:
-        result = Gameboard().result
+        gb = Gameboard()
+        result = gb.result
         if result == 0:
             cv2.destroyAllWindows()
             break
         if result == 1:
+            lose = np.array(losebase)
+            cv2.putText(
+                lose,
+                "Your score is " + BLOCKNAME[gb.snake[1, 2]],
+                (120, 720),
+                18,
+                3,
+                (190, 190, 190),
+                4,
+            )
             cv2.imshow("Snake2048", lose)
             while True:
                 k = cv2.waitKey()
                 if k == 98:
                     break
         if result == 2:
+            win = np.array(winbase)
             cv2.imshow("Snake2048", win)
             while True:
                 k = cv2.waitKey()
