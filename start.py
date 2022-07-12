@@ -17,12 +17,14 @@ while True:
     if page == 1 and key == 98:
         page = 0
         imshow("Snake2048", startPage)
-    if key == 99:
+    if key == 99 or key == 27:
         destroyWindow("Snake2048")
         break
     if key == 32:
         gb = Gameboard()
         result = gb.result
+        if result == 0:
+            break
         if result == 1:
             lose = np.array(losebase)
             putText(
@@ -30,7 +32,7 @@ while True:
                 "Your score is " + BLOCKNAME[gb.snake[1, 2]],
                 (120, 720),
                 18,
-                3,
+                1.5,
                 (190, 190, 190),
                 4,
             )

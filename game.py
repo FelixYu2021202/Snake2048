@@ -115,7 +115,7 @@ class Gameboard:
             if key == 32:
                 self.startGame()
                 break
-            if key == 99:
+            if key == 99 or key == 27:
                 destroyWindow("Snake2048")
                 self.result = 0
                 break
@@ -441,7 +441,7 @@ class Gameboard:
 
             imshow("Snake2048", self.gameboard)
             key = waitKey(16)  # 1000/24ms is about 42ms
-            if key == 99:
+            if key == 99 or key == 27:
                 destroyWindow("Snake2048")
                 return 0
             if key == 97:

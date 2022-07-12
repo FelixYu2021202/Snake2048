@@ -5,3 +5,7 @@ __pycache__
 pics/block.psd
 pics/snake.psd
 pics/start.psd
+pics/icon.psd
+/build
+*.spec
+/dist
