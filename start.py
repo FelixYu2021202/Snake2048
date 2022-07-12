@@ -1,35 +1,31 @@
-import cv2
 import numpy as np
 
-from game import Gameboard, BLOCKNAME
+from game import Gameboard, BLOCKNAME, imshow, imread, waitKey, destroyWindow, putText
 
-startPage = cv2.imread(".\pics\start.png")
-rulePage = cv2.imread(".\pics\\rules.png")
-losebase = cv2.imread(".\pics\lose.png")
-winbase = cv2.imread(".\pics\win.png")
-cv2.imshow("Snake2048", startPage)
+startPage = imread(".\pics\start.png")
+rulePage = imread(".\pics\\rules.png")
+losebase = imread(".\pics\lose.png")
+winbase = imread(".\pics\win.png")
+imshow("Snake2048", startPage)
 
 page = 0
 while True:
-    key = cv2.waitKey()
+    key = waitKey()
     if page == 0 and key == 114:
         page = 1
-        cv2.imshow("Snake2048", rulePage)
+        imshow("Snake2048", rulePage)
     if page == 1 and key == 98:
         page = 0
-        cv2.imshow("Snake2048", startPage)
+        imshow("Snake2048", startPage)
     if key == 99:
-        cv2.destroyAllWindows()
+        destroyWindow("Snake2048")
         break
     if key == 32:
         gb = Gameboard()
         result = gb.result
-        if result == 0:
-            cv2.destroyAllWindows()
-            break
         if result == 1:
             lose = np.array(losebase)
-            cv2.putText(
+            putText(
                 lose,
                 "Your score is " + BLOCKNAME[gb.snake[1, 2]],
                 (120, 720),
@@ -38,17 +34,13 @@ while True:
                 (190, 190, 190),
                 4,
             )
-            cv2.imshow("Snake2048", lose)
-            while True:
-                k = cv2.waitKey()
-                if k == 98:
-                    break
+            imshow("Snake2048", lose)
         if result == 2:
             win = np.array(winbase)
-            cv2.imshow("Snake2048", win)
-            while True:
-                k = cv2.waitKey()
-                if k == 98:
-                    break
-        cv2.imshow("Snake2048", startPage)
+            imshow("Snake2048", win)
+        while True:
+            k = waitKey()
+            if k == 98:
+                break
+        imshow("Snake2048", startPage)
 

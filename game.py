@@ -1,5 +1,5 @@
-import cv2
-import numpy as np
+from cv2 import imread, imshow, waitKey, destroyWindow, putText
+from numpy import rot90, array, uint8, zeros, int32
 from random import randint
 from probability import PROBABILITY
 
@@ -69,23 +69,23 @@ BLOCKNAME = """
 """.split(
     "\n"
 )
-blockbase = cv2.imread(".\pics\\block.b.png")
-picsB = [cv2.imread(".\pics\\b" + x + ".b.png") for x in BLOCKNAME]  # blocks
-picsS = [cv2.imread(".\pics\\s" + x + ".b.png") for x in BLOCKNAME]  # snake's'
-snakeheadbase = cv2.imread(".\pics\shead.b.png")
+blockbase = imread(".\pics\\block.b.png")
+picsB = [imread(".\pics\\b" + x + ".b.png") for x in BLOCKNAME]  # blocks
+picsS = [imread(".\pics\\s" + x + ".b.png") for x in BLOCKNAME]  # snake's'
+snakeheadbase = imread(".\pics\shead.b.png")
 snakehead = [
-    np.rot90(snakeheadbase, k=3),
+    rot90(snakeheadbase, k=3),
     snakeheadbase,
-    np.rot90(snakeheadbase),
-    np.rot90(snakeheadbase, k=2),
+    rot90(snakeheadbase),
+    rot90(snakeheadbase, k=2),
 ]
 
 
 class Gameboard:
-    gameboardbase = np.ones((960, 960, 3), np.uint8)
-    gameboard = np.array([])
-    gameboarddat = np.array([])
-    snake = np.zeros((64, 4), np.int32)
+    gameboardbase = zeros((960, 960, 3), uint8)
+    gameboard = array([])
+    gameboarddat = array([])
+    snake = zeros((64, 4), int32)
     nextdir = -1
     biggest = 1
     cur = 0
@@ -97,7 +97,7 @@ class Gameboard:
         for i in range(0, 920, 120):
             for j in range(0, 920, 120):
                 self.gameboardbase[i : i + 120, j : j + 120] = blockbase
-                self.gameboarddat = np.array(
+                self.gameboarddat = array(
                     [
                         [0, 0, 0, 0, 0, 0, 0, 0],
                         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -109,19 +109,18 @@ class Gameboard:
                         [0, 0, 0, 0, 0, 0, 0, 0],
                     ]
                 )
-        cv2.imshow("Snake2048", self.gameboardbase)
+        imshow("Snake2048", self.gameboardbase)
         while True:
-            key = cv2.waitKey()
+            key = waitKey()
             if key == 32:
                 self.startGame()
                 break
             if key == 99:
-                cv2.destroyAllWindows()
+                destroyWindow("Snake2048")
                 self.result = 0
                 break
 
     def startGame(self):
-        self.snake = np.full((64, 4), -2, np.int32)
         self.snake[0] = [
             3,  # x
             4,  # y
@@ -343,7 +342,7 @@ class Gameboard:
     def render(self):
         self.cur = 0
         while self.cur < 24:  # 24 fps
-            self.gameboard = np.array(self.gameboardbase)
+            self.gameboard = array(self.gameboardbase)
             for x in range(8):  # render board
                 for y in range(8):
                     if self.gameboarddat[x, y] > 0:
@@ -440,10 +439,10 @@ class Gameboard:
                         ] = picsS[t]
                 i += 1
 
-            cv2.imshow("Snake2048", self.gameboard)
-            key = cv2.waitKey(16)  # 1000/24ms is about 42ms
+            imshow("Snake2048", self.gameboard)
+            key = waitKey(16)  # 1000/24ms is about 42ms
             if key == 99:
-                cv2.destroyAllWindows()
+                destroyWindow("Snake2048")
                 return 0
             if key == 97:
                 print("left")

@@ -1,9 +1,9 @@
-import xlrd
-import numpy as np
+from xlrd import open_workbook
+from numpy import zeros
 
-_p = xlrd.open_workbook(".\p.xls").sheets()[0]
+_p = open_workbook(".\p.xls").sheets()[0]
 _rows = [_p.row(row)[1:] for row in range(1, 51)]
-_dats = np.zeros((51, 50), int)
+_dats = zeros((51, 50), int)
 for i in range(50):
     for j in range(50):
         _dats[i + 1][j] = int(_rows[i][j].value)
