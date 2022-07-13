@@ -4,7 +4,10 @@ by FelixYu2021202:
 
 ### How to start:
 Run *start.exe* **I compiled my python codes into an executable file**
+
 Or Run *start.py* **This is the source code**
+
+***Notice: If you want to run this game, please download the whole repository! The files are relevant to each other!***
 
 #### How to play:
 1. Press `space` twice to start
