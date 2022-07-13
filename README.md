@@ -18,3 +18,11 @@ Or Run *start.py* **This is the source code**
 6. Have fun
 
 _You can watch the video `play.mp4` to know more about this game_
+
+
+
+##### Some advices for playing this game
+1. Always try to eat the biggest block (that you can) first.
+2. If you think the snake is too slow, press a key and don't release it, in the game page, only 'wasd', 'c', escape key ('c' and escape key are for shutting down the game) will change the status, so if you want to speed up, it's recommended to press the key of the current direction or any key except of these three.
+3. The probability of generating blocks are in `p.xls`, you can change the probability in `p.xls`. It's safe. The backgrounds of the data are colored in *red, green, yellow, light and dark blue*, other blocks have no use. *The first column shows the biggest number on the snake, the first row shows the number that may be generated in this turn*
+4. About three rounds (the snake moves three blocks), it will generate one block on the gameboard, about six rounds it will generate two block on the gameboard. It's better to 'clean up' when there are many small blocks.
