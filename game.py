@@ -80,6 +80,8 @@ snakehead = [
     rot90(snakeheadbase, k=2),
 ]
 
+SETTINGS = {"speed": 60, "start": 2}
+
 
 class Gameboard:
     gameboardbase = zeros((960, 960, 3), uint8)
@@ -110,6 +112,7 @@ class Gameboard:
                     ]
                 )
         imshow("Snake2048", self.gameboardbase)
+        self.speed = int(1000 / SETTINGS["speed"])
         while True:
             key = waitKey()
             if key == 32:
@@ -127,9 +130,10 @@ class Gameboard:
             -1,  # -2: nothing, -1: head, 1~50: number
             0,  # 0: left, 1: up, 2: right, 3: down
         ]
-        self.snake[1] = [3, 5, 1, 0]
+        b = BLOCKNAME.index(SETTINGS["start"])
+        self.snake[1] = [3, 5, b, 0]
         self.length = 2
-        self.biggest = 1
+        self.biggest = b
         x, y = self.getpos()
         num = self.getnum()
         self.gameboarddat[x, y] = num
@@ -248,7 +252,7 @@ class Gameboard:
                 self.result = 0
                 return
             if self.biggest == 50:
-                print("you win!")  # TODO: alert
+                print("you win!")
                 self.result = 2
                 return
             # snake
@@ -336,7 +340,7 @@ class Gameboard:
                 hd = self.snake[0, 3]
                 self.nextdir = -1
 
-        print("you died")  # TODO: alert
+        print("you died")
         self.result = 1
 
     def render(self):
@@ -440,7 +444,7 @@ class Gameboard:
                 i += 1
 
             imshow("Snake2048", self.gameboard)
-            key = waitKey(16)  # 1000/24ms is about 42ms
+            key = waitKey(self.speed)  # 1000/24ms is about 42ms
             if key == 99 or key == 27:
                 destroyWindow("Snake2048")
                 return 0
