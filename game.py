@@ -80,7 +80,7 @@ snakehead = [
     rot90(snakeheadbase, k=2),
 ]
 
-SETTINGS = {"speed": 60, "start": 2}
+SETTINGS = {"speed": 60, "start": "2", "generate.one": 3, "generate.two": 6}
 
 
 class Gameboard:
@@ -124,6 +124,8 @@ class Gameboard:
                 break
 
     def startGame(self):
+        one = SETTINGS["generate.one"]
+        two = SETTINGS["generate.two"]
         self.snake[0] = [
             3,  # x
             4,  # y
@@ -193,11 +195,11 @@ class Gameboard:
                     if self.gameboarddat[i, j] != 0:
                         cnt -= 1
             if cnt > 1:
-                if randint(1, 3) == 1:  # 0.3333333 chance
+                if randint(1, one) == 1:  # 0.3333333 chance
                     x, y = self.getpos()
                     num = self.getnum()
                     self.gameboarddat[x, y] = num
-                if randint(1, 6) == 1:  # 0.1666666 chance
+                if randint(1, two) == 1:  # 0.1666666 chance
                     x, y = self.getpos()
                     num = self.getnum()
                     self.gameboarddat[x, y] = num
