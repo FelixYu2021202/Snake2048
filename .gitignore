@@ -9,3 +9,4 @@ pics/icon.psd
 /build
 *.spec
 /dist
+*.zip
