@@ -38,7 +38,7 @@ while True:
             )
             imshow("Snake2048", lose)
         if result == 2:
-            waitKey(10000)
+            waitKey(2000)
             win = np.array(winbase)
             imshow("Snake2048", win)
         while True:
