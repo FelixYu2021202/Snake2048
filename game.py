@@ -80,7 +80,12 @@ snakehead = [
     rot90(snakeheadbase, k=2),
 ]
 
-SETTINGS = {"speed": 60, "start": "2", "generate.one": 3, "generate.two": 6}
+SETTINGS = {
+    "speed": 60,
+    "start": "2",
+    "generate.one": 3,
+    "generate.two": 6,
+}  ## Settings here!
 
 
 class Gameboard:
